@@ -8,8 +8,8 @@ flowchart TD
         WPE["transformer.wpe.weight\n(Positional Embeddings)"]
     end
 
-    WTE --> B0
-    WPE --> B0
+    WTE --> Block0
+    WPE --> Block0
 
     subgraph Block0["Transformer Block 0 (h.0)"]
         LN1_0["ln_1.weight / ln_1.bias"]
@@ -20,7 +20,7 @@ flowchart TD
         MLPPROJ_0["mlp.c_proj.weight / bias\n(Feedforward Project)"]
     end
 
-    B0[LN1_0 + Attention + LN2_0 + MLP] --> B1
+    Block0 --> Block1
 
     subgraph Block1["Transformer Block 1 (h.1)"]
         LN1_1["ln_1.weight / ln_1.bias"]
@@ -31,19 +31,15 @@ flowchart TD
         MLPPROJ_1["mlp.c_proj.weight / bias"]
     end
 
-    B1 --> Block1
-
-    %% Repeat ... (Blocks 2–11 for GPT-2 small)
-
-    Block1 --> LNFinal
+    Block1 --> FinalNorm
 
     subgraph FinalLayerNorm
         LNFinal["transformer.ln_f.weight / bias"]
     end
 
-    LNFinal --> LMHead
+    FinalNorm --> LMHeadNode
 
     subgraph LMHead
-        LMHead["lm_head.weight (tied to wte.weight)"]
+        LMHeadNode["lm_head.weight\n(tied to wte.weight)"]
     end
 ```
