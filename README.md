@@ -13,11 +13,11 @@ flowchart TD
 
     subgraph Block0["Transformer Block 0 (h.0)"]
         LN1_0["ln_1.weight / ln_1.bias"]
-        ATTQKV_0["attn.c_attn.weight / bias\n(Q, K, V projections)"]
-        ATTOUT_0["attn.c_proj.weight / bias\n(Attention Output)"]
+        ATTQKV_0["attn.c_attn.weight / bias"]
+        ATTOUT_0["attn.c_proj.weight / bias"]
         LN2_0["ln_2.weight / ln_2.bias"]
-        MLPFC_0["mlp.c_fc.weight / bias\n(Feedforward Expand)"]
-        MLPPROJ_0["mlp.c_proj.weight / bias\n(Feedforward Project)"]
+        MLPFC_0["mlp.c_fc.weight / bias"]
+        MLPPROJ_0["mlp.c_proj.weight / bias"]
     end
 
     Block0 --> Block1
